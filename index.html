@@ -46,6 +46,7 @@
   #flash{position:fixed;inset:0;z-index:7;pointer-events:none;background:radial-gradient(circle at 50% 45%,rgba(255,240,180,.6),transparent 60%);opacity:0;transition:opacity .1s}
 
   #app{position:fixed;inset:0;z-index:10;display:flex;flex-direction:column;max-width:min(100vw,720px);margin:0 auto;width:100%;
+    height:100dvh;
     padding:var(--safe-t) 10px var(--safe-b);
     background:
       radial-gradient(135% 95% at 50% 26%, rgba(255,186,92,.20), transparent 56%),
@@ -102,7 +103,7 @@
   /* ---- stage (fills vertical space) ---- */
   .stage{flex:1 1 auto;display:flex;flex-direction:column;min-height:0;margin:0;gap:0;z-index:2}
   /* ---- shaft / mine ---- */
-  .shaft{position:relative;flex:1 1 auto;min-height:200px;border-radius:8px;overflow:hidden;margin:0 4px;z-index:2;
+  .shaft{position:relative;flex:1 1 auto;min-height:140px;border-radius:8px;overflow:hidden;margin:0 4px;z-index:2;
     border:3px solid #2a1c10;background:var(--cavetex,#5a4327);background-size:48px 48px;
     box-shadow:inset 0 0 50px rgba(0,0,0,.5)}
   .torch{position:absolute;width:14px;height:34px;top:14px;z-index:3;background:var(--torchtex);background-size:100% 100%;
@@ -269,6 +270,35 @@
   @media (prefers-reduced-motion:reduce){
     .oreblock,.mascot,.glint,.drill,.btn-rw::after,#loader .orb{animation:none!important}
     *{transition-duration:.001ms!important}
+  }
+
+  /* ---- phones (portrait): make everything fit the viewport, no overflow ---- */
+  @media (max-width:560px) and (orientation:portrait){
+    #app{padding-left:8px;padding-right:8px}
+    .topbar{padding:7px 9px;margin:4px 2px 5px;gap:7px}
+    .coin{width:30px;height:30px}
+    .coin::after{font-size:16px}
+    #goldVal{font-size:clamp(22px,7vw,32px)}
+    .iconbtn{width:34px;height:34px;font-size:15px}
+    .iconbtn.mus{font-size:19px}
+    .iconbtn.lang{font-size:10px}
+    .depth{padding:6px 10px;margin:0 2px 5px;gap:9px}
+    .shaft{min-height:120px;margin:0 2px}
+    .oreblock{width:min(56vw,40vh,360px);height:min(56vw,40vh,360px)}
+    .board-wrap{margin:6px 2px 0;padding:7px 7px 9px}
+    .board{gap:5px}
+    .bottombar{padding:0 2px 5px;gap:6px}
+    .bbtn{padding:9px 6px;font-size:13px}
+    .bbtn .ic{font-size:16px}
+    .actions{gap:6px;padding:7px 2px calc(7px + var(--safe-b))}
+    .btn{padding:11px 8px;font-size:14px}
+  }
+  /* very short phones: shrink the ore block further so the board never gets cut off */
+  @media (max-height:680px) and (orientation:portrait){
+    .shaft{min-height:96px}
+    .oreblock{width:min(48vw,34vh,300px);height:min(48vw,34vh,300px)}
+    .veinhint{bottom:6px}
+    .board{gap:5px}
   }
 </style>
 </head>
